@@ -154,6 +154,12 @@ double Symbol::multiplication(double a, double b)
 
 double Symbol::division(double a, double b)
 {
+	if (b == 0.0)
+	{
+		//nie mozna dzielic przez zero!
+		cerr << "Blad - Nie mozna dzielic przez zero!" << endl;
+		return 0.0;
+	}
 	return a / b;
 }
 

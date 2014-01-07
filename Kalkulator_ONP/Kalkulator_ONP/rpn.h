@@ -31,7 +31,8 @@ private:
 	void resultFunction();
 
 	void getValueFromStack(double* a);
-
+	void sqrtErrorCheck();
+	void sqrtNegativeError();
 	
 public:
 

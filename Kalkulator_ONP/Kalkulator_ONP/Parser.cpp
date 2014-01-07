@@ -100,7 +100,7 @@ void Parser::startState()
 		actionLetter();
 
 	else
-		actionError("B³¹d sk³adni");
+		actionError("Blad skladni");
 }
 
 /********************************************************************/

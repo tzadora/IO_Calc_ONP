@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string.h>
 #include <cmath>
+#include <cerrno>
+#include <cfenv>
+#pragma STDC FENV_ACCESS on
 #include <cctype>
 #include <list>
 #include <stack>
@@ -255,8 +258,15 @@ void ReversePolishNotation::resultOperator()
 void ReversePolishNotation::resultFunction()
 {
 	double a;
+
+	//czyscimy wyjatki jesli by jakies byly
+	errno = 0;
+	if (math_errhandling & MATH_ERREXCEPT) feclearexcept(FE_ALL_EXCEPT);
+
 	getValueFromStack(&a);
 	stackOfValues.push((currentSymbol.getFun())(a));
+
+	sqrtErrorCheck();
 }
 
 /*******************************************************************/
@@ -274,4 +284,33 @@ void ReversePolishNotation::getValueFromStack(double* a)
 		errors = true;
 		errorMessage = "Blad - Nie mozna pobrac liczb";
 	}
+}
+
+/*******************************************************************/
+//Metoda sprawdzajaca czy wystapil blad podczas pierwiastkowania
+
+void ReversePolishNotation::sqrtErrorCheck()
+{
+	//obsluga gdy sqrt(-1)
+	if (math_errhandling & MATH_ERRNO)
+	{
+		if (errno == EDOM)
+			sqrtNegativeError();
+	}
+	else if (math_errhandling & MATH_ERREXCEPT)
+	{
+		if (fetestexcept(FE_INVALID))
+			sqrtNegativeError();
+	}
+}
+
+/*******************************************************************/
+//Metoda reagujaca na blad podczas pierwiastkowania
+
+void ReversePolishNotation::sqrtNegativeError()
+{
+	cerr << "Blad - Pierwiastek z liczby ujemnej" << endl;
+	//wstawiamy na stos 0 jako wynik niewlasciwyhc dzialan
+	stackOfValues.pop();
+	stackOfValues.push(0.0);
 }
