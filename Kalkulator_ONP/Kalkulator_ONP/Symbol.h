@@ -16,7 +16,6 @@ private:
 	std::string content;						//Zawartosc symbolu		
 	int priority;								//priorytet operatora
 
-	//tutaj zastosowac atof z stdlib
 
 	//funkcje pomocnicze
 	void setIfOperator();				//ustawia parametry operatora

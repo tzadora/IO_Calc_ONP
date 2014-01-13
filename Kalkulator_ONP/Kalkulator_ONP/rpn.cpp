@@ -11,6 +11,9 @@
 #include "rpn.h"
 
 
+#define PI 3.14159265
+
+
 using namespace std;
 
 ReversePolishNotation::ReversePolishNotation()
@@ -264,6 +267,11 @@ void ReversePolishNotation::resultFunction()
 	if (math_errhandling & MATH_ERREXCEPT) feclearexcept(FE_ALL_EXCEPT);
 
 	getValueFromStack(&a);
+
+	//zmiena na stopnie jesli jest to funkcja trygonometryczna 
+	if (currentSymbol.showSymbol() == "cos" || currentSymbol.showSymbol() == "sin")
+		a = a * PI / 180;
+
 	stackOfValues.push((currentSymbol.getFun())(a));
 
 	sqrtErrorCheck();

@@ -9,7 +9,8 @@ using namespace std;
 
 #define MAX_BUFFER_SIZE 500
 
-int main() {
+int main() 
+{
 	for (;;)
 	{
 		//stworzenie bufora o podanym rozmiarze
