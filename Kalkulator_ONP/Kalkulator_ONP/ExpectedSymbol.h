@@ -15,7 +15,7 @@ enum tokenType { ANY,
 
 class ExpectedSymbol
 {
-private:
+protected:
 	bool isNumber(const std::string & num);
 	bool isOperator(const std::string & op);
 	bool isFunction(const std::string & fun);

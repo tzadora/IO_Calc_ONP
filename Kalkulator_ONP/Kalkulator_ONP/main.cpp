@@ -17,21 +17,26 @@ int main()
 		char buffer[MAX_BUFFER_SIZE];
 
 		//wyswietlenie komunikatow i wczytanie danych od uzytkownika
-		UserInterface ui(MAX_BUFFER_SIZE);
-		ui.welcome();
-		ui.loadBuffer(buffer);
+		UserInterface* ui = new UserInterface(MAX_BUFFER_SIZE);
+		ui->welcome();
+		ui->loadBuffer(buffer);
 
 		//przygotowanie pod onp
 		string expression = buffer;
-		ReversePolishNotation rpn;
+		ReversePolishNotation* rpn = new ReversePolishNotation;
 
 		//obliczenie i wyswietlenie wyniku
-		ui.showResult(rpn.calculate(expression));
+		ui->showResult(rpn->calculate(expression));
+		delete rpn;
 
-		if (ui.wantMoreCalculation())
+		if (ui->wantMoreCalculation())
 			continue;
 		else
+		{
+			delete ui;
 			break;
+		}
+			
 	}
 	return 0;
 }

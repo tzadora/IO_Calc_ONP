@@ -32,23 +32,8 @@ double ReversePolishNotation::calculate(const std::string & expression)
 	if (!parser.parse())
 		return 0.0;
 
-	////test parsera czy dziala
-	//for (list<Symbol>::iterator iter = listOfSymbols.begin(); iter != listOfSymbols.end(); iter++)
-	//{
-	//	cout << iter->showSymbol().c_str() << endl;
-	//}
-	//cout << "END PARSER TEST" << endl << endl;
-	//
 	if (!toPostfixNotation())
 		return 0.0;
-
-	////test postfix
-	//for (list<Symbol>::iterator iter = listOfSymbols.begin(); iter != listOfSymbols.end(); iter++)
-	//{
-	//	cout << iter->showSymbol().c_str() << endl;
-	//}
-
-	//cout << "END POSTFIX TEST" << endl << endl;
 
 	return toResult();
 }
